@@ -1,0 +1,9 @@
+FROM golang:1.17.9-alpine3.15 AS builder
+
+RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.45.2
+
+ENV GO111MODULE on
+ENV GOOS linux
+ENV CGO_ENABLED 0
+
+EXPOSE 3001 3002

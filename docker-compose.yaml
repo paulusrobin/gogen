@@ -1,0 +1,45 @@
+version: '3.1'
+services:
+  gogen:
+    build:
+      context: ..
+      dockerfile: Dockerfile-builder
+      args:
+        SSH_PRIVATE_KEY: ${SSH_PRIVATE_KEY}
+    volumes:
+      - .:/app
+    working_dir: /app
+    tty: true
+    environment:
+      HTTP_PORT: 8001
+      PPROF_ENABLED: 'true'
+      PPROF_PORT: 8002
+      GRPC_PORT: 50051
+      PUBSUB_EMULATOR_HOST: "pubsub:8095"
+    ports:
+      - "3001:8001"
+      - "3002:8002"
+    depends_on:
+      - pubsub
+    networks:
+      - intranet
+
+  pubsub:
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:380.0.0-emulators
+    entrypoint: gcloud beta emulators pubsub start --project=test-project-id --host-port=0.0.0.0:8095
+    restart: unless-stopped
+    ports:
+      - "8095:8095"
+    networks:
+      - intranet
+
+  consul:
+    image: consul
+    ports:
+      - 8500:8500
+    networks:
+      - intranet
+
+networks:
+  intranet:
+    driver: bridge
