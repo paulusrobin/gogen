@@ -16,7 +16,9 @@ func InitConfig() Config {
 	if err != nil {
 		panic("cannot initialize .env config")
 	}
-	readFromConsul(cfg)
+	if err := readFromConsul(cfg); err != nil {
+		panic(err)
+	}
 	return cfg
 }
 
@@ -37,21 +39,21 @@ func readConfigFromEnv() (Config, error) {
 	return cfg, nil
 }
 
-func readFromConsul(cfg Config) {
+func readFromConsul(cfg Config) error {
 	hotReloadViper := viper.New()
 	if err := hotReloadViper.AddRemoteProvider(remoteConfigProvider, cfg.endpoint(), cfg.Consul.Key); err == nil {
-		log.Error().
-			Err(err).
-			Msg("cannot read remote conf from consul, fallback to local default config")
-		return
+		log.Fatal().Err(err).Msg("cannot add remote config from consul")
+		return err
 	}
 
 	hotReloadViper.SetConfigType("json")
 	if err := hotReloadViper.ReadRemoteConfig(); err != nil {
-		log.Error().Err(err).Msg("cannot read remote conf from consul, fallback to local default config")
+		log.Error().Err(err).Msg("cannot read remote business config from consul, fallback to local default config")
 	} else {
-		if err := hotReloadViper.Unmarshal(&RuntimeConfig); err != nil {
-			log.Error().Err(err).Msg("cannot parse conf from consul, fallback to local default config")
+		if err := hotReloadViper.Unmarshal(&runtimeBusinessConfig); err != nil {
+			log.Error().Err(err).Msg("cannot parse business config from consul, fallback to local default config")
+		} else {
+			log.Info().Msg("successfully initialized business config from consul")
 		}
 	}
 
@@ -61,15 +63,16 @@ func readFromConsul(cfg Config) {
 	go func() {
 		for {
 			if err := hotReloadViper.WatchRemoteConfig(); err != nil {
-				log.Error().Err(err).Msg("cannot read remote conf from consul")
+				log.Error().Err(err).Msg("cannot read remote business config from consul, using last fetched config")
 				continue
 			}
 
-			if err := hotReloadViper.Unmarshal(&RuntimeConfig); err != nil {
-				log.Error().Err(err).Msg("cannot parse conf from consul, using last fetched config")
+			if err := hotReloadViper.Unmarshal(&runtimeBusinessConfig); err != nil {
+				log.Error().Err(err).Msg("cannot parse business config from consul, using last fetched config")
 			}
 
 			time.Sleep(time.Second * 5)
 		}
 	}()
+	return nil
 }

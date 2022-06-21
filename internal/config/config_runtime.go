@@ -1,23 +1,16 @@
 package config
 
-var RuntimeConfig = NewBusinessConfig()
+import "sync"
 
 type (
-	BusinessConfig struct {
-		User UserConfig `mapstructure:",squash"`
-	}
-
-	UserConfig struct {
-		CachingEnabled bool `mapstructure:"USER_CACHING_ENABLED"`
+	businessConfig struct {
+		sync.Mutex
 	}
 )
 
-// NewBusinessConfig initiate business config object.
-func NewBusinessConfig() BusinessConfig {
+var runtimeBusinessConfig = newBusinessConfig()
+
+func newBusinessConfig() businessConfig {
 	// fallback values
-	return BusinessConfig{
-		User: UserConfig{
-			CachingEnabled: false,
-		},
-	}
+	return businessConfig{}
 }

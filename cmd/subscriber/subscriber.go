@@ -31,6 +31,7 @@ func runner(cfg config.Config) func(c *cobra.Command, args []string) error {
 	}
 }
 
+// Cmd expose command runner
 func Cmd(cfg config.Config) *cobra.Command {
 	return &cobra.Command{
 		Use:   "subscriber",
