@@ -9,10 +9,12 @@ import (
 type (
 	// Config project config.
 	Config struct {
-		Consul Consul `mapstructure:",squash"`
-		HTTP   HTTP   `mapstructure:",squash"`
-		GRPC   GRPC   `mapstructure:",squash"`
-		PubSub PubSub `mapstructure:",squash"`
+		Consul               Consul `mapstructure:",squash"`
+		HTTP                 HTTP   `mapstructure:",squash"`
+		GRPC                 GRPC   `mapstructure:",squash"`
+		PubSub               PubSub `mapstructure:",squash"`
+		PProf                Pprof  `mapstructure:",squash"`
+		RuntimeConfigEnabled bool   `mapstructure:"RUNTIME_CONFIG_ENABLED"`
 	}
 
 	// Consul holds consul remote config related values.
@@ -25,22 +27,24 @@ type (
 
 	// HTTP contains HTTP related configuration.
 	HTTP struct {
-		Port         int  `mapstructure:"HTTP_PORT"`
-		PprofEnabled bool `mapstructure:"PPROF_ENABLED"`
-		PprofPort    int  `mapstructure:"PPROF_PORT"`
+		Port int `mapstructure:"HTTP_PORT"`
 	}
 
 	// GRPC contains GRPC related configuration.
 	GRPC struct {
-		Port         int  `mapstructure:"GRPC_PORT"`
-		PprofEnabled bool `mapstructure:"PPROF_ENABLED"`
-		PprofPort    int  `mapstructure:"PPROF_PORT"`
+		Port int `mapstructure:"GRPC_PORT"`
 	}
 
 	// PubSub contains google PubSub project configuration.
 	PubSub struct {
 		ProjectID   string `mapstructure:"PUBSUB_PROJECT_ID"`
 		Credentials string `mapstructure:"PUBSUB_CREDENTIALS"`
+	}
+
+	// Pprof contains Pprof project configuration.
+	Pprof struct {
+		Enabled bool `mapstructure:"PPROF_ENABLED"`
+		Port    int  `mapstructure:"PPROF_PORT"`
 	}
 )
 
