@@ -4,8 +4,8 @@ import (
 	"context"
 	"github.com/go-kit/kit/endpoint"
 	kit "github.com/go-kit/kit/transport/http"
-	"github.com/paulusrobin/gogen/internal/pkg/json"
-	"github.com/paulusrobin/gogen/internal/pkg/validator"
+	"github.com/paulusrobin/gogen-golib/encoding/json"
+	"github.com/paulusrobin/gogen-golib/validator/interface"
 	"net/http"
 )
 
