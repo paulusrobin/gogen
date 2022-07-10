@@ -10,8 +10,8 @@ type subscriberServer struct {
 	cfg config.Config
 }
 
-func (s subscriberServer) Run() {
-
+func (s subscriberServer) Run() error {
+	panic("implement me")
 }
 
 func Subscriber(sig chan os.Signal, cfg config.Config) Server {

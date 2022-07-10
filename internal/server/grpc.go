@@ -10,8 +10,8 @@ type grpcServer struct {
 	cfg config.Config
 }
 
-func (s grpcServer) Run() {
-
+func (s grpcServer) Run() error {
+	panic("implement me")
 }
 
 func GRPC(sig chan os.Signal, cfg config.Config) Server {

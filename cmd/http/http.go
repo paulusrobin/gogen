@@ -23,7 +23,7 @@ func runner(cfg config.Config) func(c *cobra.Command, args []string) error {
 		sigChannel := make(chan os.Signal, 1)
 		signal.Notify(sigChannel, os.Interrupt, syscall.SIGTERM, syscall.SIGQUIT)
 
-		go server.HTTP(sigChannel, cfg)
+		go server.HTTP(sigChannel, cfg).Run()
 
 		sig := <-sigChannel
 		log.Info().Msgf("[http-server] signal %s received, exiting", sig)

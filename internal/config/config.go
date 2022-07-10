@@ -2,22 +2,33 @@ package config
 
 import (
 	"fmt"
+	"gorm.io/gorm/logger"
 	"os"
 	"strconv"
+	"time"
 )
 
 type (
 	// Config project config.
 	Config struct {
-		Consul               Consul `mapstructure:",squash"`
-		HTTP                 HTTP   `mapstructure:",squash"`
-		GRPC                 GRPC   `mapstructure:",squash"`
-		PubSub               PubSub `mapstructure:",squash"`
-		PProf                Pprof  `mapstructure:",squash"`
-		RuntimeConfigEnabled bool   `mapstructure:"RUNTIME_CONFIG_ENABLED"`
+		Consul   Consul           `mapstructure:",squash"`
+		HTTP     HTTP             `mapstructure:",squash"`
+		GRPC     GRPC             `mapstructure:",squash"`
+		PubSub   PubSub           `mapstructure:",squash"`
+		PProf    Pprof            `mapstructure:",squash"`
+		Postgres PostgresDatabase `mapstructure:",squash"`
 	}
 
-	// Consul holds consul remote config related values.
+	// PostgresDatabase contains postgres configuration.
+	PostgresDatabase struct {
+		DSN                   string          `mapstructure:"DB_POSTGRES_DSN"`
+		LogLevel              logger.LogLevel `mapstructure:"DB_POSTGRES_LOG_LEVEL"`
+		MaxOpenConnections    int             `mapstructure:"DB_POSTGRES_MAX_OPEN_CONNECTIONS"`
+		MaxIdleConnections    int             `mapstructure:"DB_POSTGRES_MAX_IDLE_CONNECTIONS"`
+		MaxConnectionLifetime time.Duration   `mapstructure:"DB_POSTGRES_MAX_CONNECTIONS_LIFETIME"`
+	}
+
+	// Consul contains consul remote config related values.
 	Consul struct {
 		Host  string `mapstructure:"CONSUL_HOST"`
 		Port  int    `mapstructure:"CONSUL_PORT"`
