@@ -10,13 +10,17 @@ type subscriberServer struct {
 	cfg config.Config
 }
 
-func (s subscriberServer) Run() error {
+func (s *subscriberServer) Run() error {
 	panic("implement me")
 }
 
-func Subscriber(sig chan os.Signal, cfg config.Config) Server {
+func (s *subscriberServer) Shutdown() error {
+	panic("implement me")
+}
+
+func Subscriber(sig chan os.Signal, cfg config.Config) (Server, error) {
 	return &subscriberServer{
 		sig: sig,
 		cfg: cfg,
-	}
+	}, nil
 }

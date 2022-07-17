@@ -39,7 +39,8 @@ type (
 
 	// HTTP contains HTTP related configuration.
 	HTTP struct {
-		Port int `mapstructure:"HTTP_PORT"`
+		Port             int           `mapstructure:"HTTP_PORT"`
+		GracefulDuration time.Duration `mapstructure:"HTTP_GRACEFUL_DURATION"`
 	}
 
 	// GRPC contains GRPC related configuration.

@@ -10,13 +10,17 @@ type grpcServer struct {
 	cfg config.Config
 }
 
-func (s grpcServer) Run() error {
+func (s *grpcServer) Run() error {
 	panic("implement me")
 }
 
-func GRPC(sig chan os.Signal, cfg config.Config) Server {
+func (s *grpcServer) Shutdown() error {
+	panic("implement me")
+}
+
+func GRPC(sig chan os.Signal, cfg config.Config) (Server, error) {
 	return &grpcServer{
 		sig: sig,
 		cfg: cfg,
-	}
+	}, nil
 }
