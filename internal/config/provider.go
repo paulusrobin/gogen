@@ -1,24 +1,44 @@
 package config
 
 import (
-	"time"
-
+	consulViper "github.com/paulusrobin/gogen-golib/remote-config/consul/integrations/viper"
+	consul "github.com/paulusrobin/gogen-golib/remote-config/consul/interface"
+	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
-	_ "github.com/spf13/viper/remote" // needed to use viper remote config features
 )
-
-const remoteConfigProvider = "consul"
 
 // InitConfig initializes configuration from .env file and returns config structure.
 func InitConfig() Config {
-	cfg, err := readConfigFromEnv()
+	var (
+		cfg    Config
+		reader consul.Reader
+		err    error
+	)
+
+	cfg, err = readConfigFromEnv()
 	if err != nil {
 		panic("cannot initialize .env config")
 	}
-	if err := readFromConsul(cfg); err != nil {
-		panic(err)
+
+	reader, err = consulViper.NewConsulReader(consul.Config{
+		Connection: consul.ConnectionConfig{
+			Host:  cfg.Consul.Host,
+			Port:  cfg.Consul.Port,
+			Token: cfg.Consul.Token,
+			Key:   cfg.Consul.Key,
+		},
+		ConfigType: "json",
+		Interval:   cfg.Consul.RefreshInterval,
+	})
+	if err != nil {
+		panic(errors.Wrap(err, "cannot initialize consul reader"))
 	}
+
+	if err = reader.Read(&runtimeBusinessConfig); err != nil {
+		panic(errors.Wrap(err, "cannot initialize consul business config variable"))
+	}
+
 	return cfg
 }
 
@@ -37,42 +57,4 @@ func readConfigFromEnv() (Config, error) {
 		return Config{}, err
 	}
 	return cfg, nil
-}
-
-func readFromConsul(cfg Config) error {
-	hotReloadViper := viper.New()
-	if err := hotReloadViper.AddRemoteProvider(remoteConfigProvider, cfg.endpoint(), cfg.Consul.Key); err == nil {
-		log.Fatal().Err(err).Msg("cannot add remote config from consul")
-		return err
-	}
-
-	hotReloadViper.SetConfigType("json")
-	if err := hotReloadViper.ReadRemoteConfig(); err != nil {
-		log.Error().Err(err).Msg("cannot read remote business config from consul, fallback to local default config")
-	} else {
-		if err := hotReloadViper.Unmarshal(&runtimeBusinessConfig); err != nil {
-			log.Error().Err(err).Msg("cannot parse business config from consul, fallback to local default config")
-		} else {
-			log.Info().Msg("successfully initialized business config from consul")
-		}
-	}
-
-	log.Info().Msg("remote config was read successfully from consul. starting periodical updates...")
-
-	// open a goroutine to watch remote changes forever
-	go func() {
-		for {
-			if err := hotReloadViper.WatchRemoteConfig(); err != nil {
-				log.Error().Err(err).Msg("cannot read remote business config from consul, using last fetched config")
-				continue
-			}
-
-			if err := hotReloadViper.Unmarshal(&runtimeBusinessConfig); err != nil {
-				log.Error().Err(err).Msg("cannot parse business config from consul, using last fetched config")
-			}
-
-			time.Sleep(time.Second * 5)
-		}
-	}()
-	return nil
 }
