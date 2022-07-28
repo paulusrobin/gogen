@@ -27,9 +27,7 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: gogen
+      POSTGRES_PASSWORD: example
     ports:
       - "5432:5432"
     networks:
