@@ -14,7 +14,7 @@ RUN mkdir -p ~/.ssh && echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa && chmod 0600 ~
     && git config --global url."git@github.com:".insteadOf https://github.com/ \
     && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-COPY --chown=builder:builder . $APP_HOME/
+COPY --chown=builder:builder .. $APP_HOME/
 # build executable to ./bin/server
 RUN make build-native
 
@@ -35,5 +35,5 @@ WORKDIR $APP_HOME
 COPY --from=builder $BUILD_DIR/.env.sample .env
 COPY --chown=runner:runner --from=builder $BUILD_DIR/bin .
 
-ENTRYPOINT ["$APP_HOME/gogen-project", "http-server"]
+ENTRYPOINT ["$APP_HOME/gogen", "http"]
 CMD ["--help"]

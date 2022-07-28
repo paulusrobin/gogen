@@ -17,10 +17,29 @@ services:
       GRPC_PORT: 50051
       PUBSUB_EMULATOR_HOST: "pubsub:8095"
     ports:
-      - "3001:8001"
-      - "3002:8002"
+      - "8080:8080"
     depends_on:
       - pubsub
+    networks:
+      - intranet
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gogen
+    ports:
+      - "5432:5432"
+    networks:
+      - intranet
+
+  redis:
+    image: redis:alpine
+    command: redis-server --requirepass admin
+    ports:
+      - "6379:6379"
     networks:
       - intranet
 
@@ -35,6 +54,8 @@ services:
 
   consul:
     image: consul
+    volumes:
+      - .:/app
     ports:
       - "8500:8500"
     networks:

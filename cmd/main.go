@@ -17,19 +17,11 @@ var (
 	}
 )
 
-func init() {
-	cobra.OnInitialize(
-		func() {
-			cfg = config.InitConfig()
-		},
-		func() {
-			globalLogLevel := zerolog.InfoLevel
-			zerolog.SetGlobalLevel(globalLogLevel)
-		},
-	)
-}
-
 func main() {
+	cfg = config.InitConfig()
+	globalLogLevel := zerolog.InfoLevel
+	zerolog.SetGlobalLevel(globalLogLevel)
+
 	cmd.AddCommand(
 		http.Cmd(cfg),       // add http command
 		grpc.Cmd(cfg),       // add grpc command
