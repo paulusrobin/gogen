@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/go-kit/kit v0.12.0
 	github.com/paulusrobin/gogen-golib/encoding/json v1.0.0
+	github.com/paulusrobin/gogen-golib/go-kit/echo v1.0.0
 	github.com/paulusrobin/gogen-golib/mandatory v1.0.0
 	github.com/paulusrobin/gogen-golib/remote-config/consul/integrations/viper v1.0.0
 	github.com/paulusrobin/gogen-golib/remote-config/consul/interface v1.0.0

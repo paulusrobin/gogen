@@ -7,11 +7,13 @@ import (
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	goKitEcho "github.com/paulusrobin/gogen-golib/go-kit/echo"
 	goPlaygroundV10 "github.com/paulusrobin/gogen-golib/validator/integrations/go-playground-v10"
 	validator "github.com/paulusrobin/gogen-golib/validator/interface"
 	"github.com/paulusrobin/gogen/internal/config"
 	"github.com/paulusrobin/gogen/internal/pkg/user"
 	userEndpoint "github.com/paulusrobin/gogen/internal/pkg/user/endpoint"
+	userPayload "github.com/paulusrobin/gogen/internal/pkg/user/payload"
 	userUseCase "github.com/paulusrobin/gogen/internal/pkg/user/usecase"
 	"github.com/paulusrobin/gogen/internal/repository/postgres"
 	userRepository "github.com/paulusrobin/gogen/internal/repository/postgres/user"
@@ -97,12 +99,29 @@ func (s *httpServer) middlewares() []echo.MiddlewareFunc {
 
 // routes function to initialize http routes.
 func (s *httpServer) routes() {
+	api := s.ec.Group("/api")
 
+	// user API
+	userAPI := api.Group("/users")
+	userAPI.POST("", goKitEcho.Handler(
+		s.user.createEndpoint,
+		goKitEcho.WithDecoder(userPayload.DecodeCreateRequest(s.validation)),
+		goKitEcho.WithEncoder(userPayload.EncodeCreateRequest),
+	))
 }
 
 // errorHandler function to handle http error.
 func (s *httpServer) errorHandler(err error, c echo.Context) {
-	_ = c.JSON(http.StatusInternalServerError, map[string]interface{}{"message": err.Error()})
+	if vErr, isValidationErr := validator.IsValidationError(err); isValidationErr {
+		_ = c.JSON(http.StatusInternalServerError, map[string]interface{}{
+			"message": vErr.Error(),
+			"details": vErr.Details,
+		})
+		return
+	}
+	_ = c.JSON(http.StatusInternalServerError, map[string]interface{}{
+		"message": err.Error(),
+	})
 }
 
 // Run function to run http server.

@@ -26,6 +26,6 @@ func CreateUserEndpoint(param CreateUserParam) endpoint.Endpoint {
 		if err := param.UseCase.Create(ctx, createUserRequest); err != nil {
 			return nil, err
 		}
-		return nil, nil
+		return "success", nil
 	}
 }

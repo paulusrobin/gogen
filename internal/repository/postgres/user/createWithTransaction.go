@@ -7,6 +7,6 @@ import (
 )
 
 // CreateWithTransaction function to create user object to database using transaction.
-func (r repository) CreateWithTransaction(ctx context.Context, tx *gorm.DB, user model.User) error {
+func (r repository) CreateWithTransaction(ctx context.Context, tx *gorm.DB, user *model.User) error {
 	return tx.WithContext(ctx).Create(user).Error
 }

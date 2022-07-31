@@ -434,13 +434,15 @@ github.com/pascaldekloe/goe v0.1.0 h1:cBOtyMzM9HTpWjXfbbunk26uA6nG3a8n06Wieeh0Mw
 github.com/pascaldekloe/goe v0.1.0/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/paulusrobin/gogen-golib/encoding/json v1.0.0 h1:SNwJC5suMC7Mp6KsSfFmyha8Yu5u6w34zf+iavEAyZg=
 github.com/paulusrobin/gogen-golib/encoding/json v1.0.0/go.mod h1:NN4Y222b+qsGBllLmRK00VsZmpmHRGIYqairUzE+q+g=
+github.com/paulusrobin/gogen-golib/go-kit/echo v1.0.0 h1:3PdLsGzZIaW3dDICWg56jQD4WnhPw8mC+552h5bXJqg=
+github.com/paulusrobin/gogen-golib/go-kit/echo v1.0.0/go.mod h1:D6NyTPItDaJKr+6nK6EewoSNExhk/9g3AmxV3Kpx/N0=
 github.com/paulusrobin/gogen-golib/mandatory v1.0.0 h1:yHi7Zq7TELgoCsRaDOhW38RSCWfm6nBY4UIy8rHBNHo=
 github.com/paulusrobin/gogen-golib/mandatory v1.0.0/go.mod h1:aMGkD6ZAGwYB+B9sOahRKf0avJf20eDRLkI6hzBaLTk=
 github.com/paulusrobin/gogen-golib/remote-config/consul/integrations/viper v1.0.0 h1:ELVqOZTInGCH4Hvm4E6+6RzpPVquUQdo2bpZQlBUUKo=
 github.com/paulusrobin/gogen-golib/remote-config/consul/integrations/viper v1.0.0/go.mod h1:EJyk9ZbGWDDPKDIJsbHxNswhLoNtYJo5eXWuyycnJuo=
 github.com/paulusrobin/gogen-golib/remote-config/consul/interface v1.0.0 h1:1sISPB+sMGo5y45aIoQUOFr97TbQjfBZ03JC5CVa40M=
 github.com/paulusrobin/gogen-golib/remote-config/consul/interface v1.0.0/go.mod h1:4EQJDujhhO/a2grXziYdsPBfZN7JAr3aFR/Ev7aB2XA=
-github.com/paulusrobin/gogen-golib/validator/integrations/go-playground-v10 v1.0.0 h1:c8pFBr9dbFyhHwFUUoh0uXRryqH6nVEX+w2sa1k3kHA=
+github.com/paulusrobin/gogen-golib/validator/integrations/go-playground-v10 v1.0.0 h1:iF0kB5eHM8DKOGxVY4Zwmont7jPC0W4u5CVxRYQsIgY=
 github.com/paulusrobin/gogen-golib/validator/integrations/go-playground-v10 v1.0.0/go.mod h1:bZ7QSJNS6DJxYtrujzu7OCm4if1WxoAqRmCHvJB9vUk=
 github.com/paulusrobin/gogen-golib/validator/interface v1.0.0 h1:ENzGPsl0zlKhRZ63P7Bl1mQ8Cmb34fahrxvgLYaAa8k=
 github.com/paulusrobin/gogen-golib/validator/interface v1.0.0/go.mod h1:NNsJCFIO9rEUSDOMCXEKtsJk49GNjcUWwKqINAnfF1Y=

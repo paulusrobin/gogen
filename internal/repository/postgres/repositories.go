@@ -7,6 +7,6 @@ import (
 )
 
 type UserRepository interface {
-	Create(ctx context.Context, user model.User) error
-	CreateWithTransaction(ctx context.Context, tx *gorm.DB, user model.User) error
+	Create(ctx context.Context, user *model.User) error
+	CreateWithTransaction(ctx context.Context, tx *gorm.DB, user *model.User) error
 }
