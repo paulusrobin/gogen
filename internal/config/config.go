@@ -30,10 +30,12 @@ type (
 
 	// Consul contains consul remote config related values.
 	Consul struct {
-		Host            string        `mapstructure:"CONSUL_HOST"`
-		Port            int           `mapstructure:"CONSUL_PORT"`
+		Host  string `mapstructure:"CONSUL_HOST"`
+		Port  int    `mapstructure:"CONSUL_PORT"`
+		Token string `mapstructure:"CONSUL_HTTP_TOKEN"`
+
+		// RuntimeConfig settings
 		Key             string        `mapstructure:"CONSUL_KEY"`
-		Token           string        `mapstructure:"CONSUL_HTTP_TOKEN"`
 		RefreshInterval time.Duration `mapstructure:"CONSUL_REFRESH_INTERVAL"`
 	}
 
