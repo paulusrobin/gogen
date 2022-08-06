@@ -11,12 +11,17 @@ import (
 	goPlaygroundV10 "github.com/paulusrobin/gogen-golib/validator/integrations/go-playground-v10"
 	validator "github.com/paulusrobin/gogen-golib/validator/interface"
 	"github.com/paulusrobin/gogen/internal/config"
+	"github.com/paulusrobin/gogen/internal/pkg/greeting"
+	greetingEndpoint "github.com/paulusrobin/gogen/internal/pkg/greeting/endpoint"
+	greetingPayload "github.com/paulusrobin/gogen/internal/pkg/greeting/payload"
+	greetingUseCase "github.com/paulusrobin/gogen/internal/pkg/greeting/usecase"
 	"github.com/paulusrobin/gogen/internal/pkg/user"
 	userEndpoint "github.com/paulusrobin/gogen/internal/pkg/user/endpoint"
 	userPayload "github.com/paulusrobin/gogen/internal/pkg/user/payload"
 	userUseCase "github.com/paulusrobin/gogen/internal/pkg/user/usecase"
 	"github.com/paulusrobin/gogen/internal/repository/postgres"
 	userRepository "github.com/paulusrobin/gogen/internal/repository/postgres/user"
+	transportHttp "github.com/paulusrobin/gogen/internal/server/transport/http"
 	"github.com/rs/zerolog/log"
 	"gorm.io/gorm"
 	"net/http"
@@ -36,7 +41,14 @@ type (
 		ec         *echo.Echo
 		db         *gorm.DB
 		validation validator.Validation
-		user       userPackage
+
+		// package
+		greeting greetingPackage
+		user     userPackage
+	}
+	greetingPackage struct {
+		useCase       greeting.UseCase
+		greetEndpoint endpoint.Endpoint
 	}
 	userPackage struct {
 		repository     postgres.UserRepository
@@ -60,9 +72,15 @@ func (s *httpServer) init() error {
 	s.user.repository = userRepository.NewRepository(db)
 
 	// initialize use case
+	s.greeting.useCase = greetingUseCase.NewUseCase()
 	s.user.useCase = userUseCase.NewUseCase(s.user.repository)
 
 	// initialize endpoint
+	s.greeting.greetEndpoint = greetingEndpoint.GreetingEndpoint(greetingEndpoint.GreetingParam{
+		Cfg:        s.cfg,
+		UseCase:    s.greeting.useCase,
+		Validation: s.validation,
+	})
 	s.user.createEndpoint = userEndpoint.CreateUserEndpoint(userEndpoint.CreateUserParam{
 		Cfg:        s.cfg,
 		UseCase:    s.user.useCase,
@@ -99,14 +117,20 @@ func (s *httpServer) middlewares() []echo.MiddlewareFunc {
 
 // routes function to initialize http routes.
 func (s *httpServer) routes() {
+	greet := s.ec.Group("/greetings")
+	greet.GET("", transportHttp.MakeHandler(
+		s.greeting.greetEndpoint,
+		goKitEcho.WithDecoder(greetingPayload.DecodeGreetingRequest(s.validation)),
+	))
+
 	api := s.ec.Group("/api")
 
 	// user API
 	userAPI := api.Group("/users")
-	userAPI.POST("", goKitEcho.Handler(
+	userAPI.POST("", transportHttp.MakeHandler(
 		s.user.createEndpoint,
 		goKitEcho.WithDecoder(userPayload.DecodeCreateRequest(s.validation)),
-		goKitEcho.WithEncoder(userPayload.EncodeCreateRequest),
+		goKitEcho.WithEncoder(userPayload.EncodeCreateResponse),
 	))
 }
 

@@ -36,7 +36,7 @@ func DecodeCreateRequest(validator validator.Validation) func(c echo.Context) (i
 	}
 }
 
-func EncodeCreateRequest(c echo.Context, response interface{}) error {
+func EncodeCreateResponse(c echo.Context, response interface{}) error {
 	return c.JSON(http.StatusCreated, map[string]interface{}{
 		"message": response,
 	})
