@@ -2,14 +2,14 @@ package usecase
 
 import (
 	"github.com/paulusrobin/gogen/internal/pkg/user"
-	"github.com/paulusrobin/gogen/internal/repository/postgres"
+	"github.com/paulusrobin/gogen/internal/repository"
 )
 
 type useCase struct {
-	userRepository postgres.UserRepository
+	userRepository repository.UserRepository
 }
 
 // NewUseCase function to initialize user use case.
-func NewUseCase(userRepository postgres.UserRepository) user.UseCase {
+func NewUseCase(userRepository repository.UserRepository) user.UseCase {
 	return useCase{userRepository: userRepository}
 }

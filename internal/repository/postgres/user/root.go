@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/paulusrobin/gogen/internal/repository/postgres"
+	repository2 "github.com/paulusrobin/gogen/internal/repository"
 	"gorm.io/gorm"
 )
 
@@ -10,6 +10,6 @@ type repository struct {
 }
 
 // NewRepository function to initialize repository.
-func NewRepository(db *gorm.DB) postgres.UserRepository {
+func NewRepository(db *gorm.DB) repository2.UserRepository {
 	return repository{db: db}
 }

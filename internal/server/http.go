@@ -16,9 +16,10 @@ import (
 	greetingEndpoint "github.com/paulusrobin/gogen/internal/pkg/greeting/endpoint"
 	greetingUseCase "github.com/paulusrobin/gogen/internal/pkg/greeting/usecase"
 	"github.com/paulusrobin/gogen/internal/pkg/user"
+	userEncoding "github.com/paulusrobin/gogen/internal/pkg/user/encoding"
 	userEndpoint "github.com/paulusrobin/gogen/internal/pkg/user/endpoint"
-	userPayload "github.com/paulusrobin/gogen/internal/pkg/user/payload"
 	userUseCase "github.com/paulusrobin/gogen/internal/pkg/user/usecase"
+	"github.com/paulusrobin/gogen/internal/repository"
 	"github.com/paulusrobin/gogen/internal/repository/postgres"
 	userRepository "github.com/paulusrobin/gogen/internal/repository/postgres/user"
 	transportHttp "github.com/paulusrobin/gogen/internal/server/transport/http"
@@ -51,7 +52,7 @@ type (
 		greetEndpoint endpoint.Endpoint
 	}
 	userPackage struct {
-		repository     postgres.UserRepository
+		repository     repository.UserRepository
 		useCase        user.UseCase
 		createEndpoint endpoint.Endpoint
 	}
@@ -129,8 +130,8 @@ func (s *httpServer) routes() {
 	userAPI := api.Group("/users")
 	userAPI.POST("", transportHttp.MakeHandler(
 		s.user.createEndpoint,
-		goKitEcho.WithDecoder(userPayload.DecodeCreateRequest(s.validation)),
-		goKitEcho.WithEncoder(userPayload.EncodeCreateResponse),
+		goKitEcho.WithDecoder(userEncoding.DecodeCreateRequest(s.validation)),
+		goKitEcho.WithEncoder(userEncoding.EncodeCreateResponse),
 	))
 }
 
