@@ -7,7 +7,7 @@ import (
 	validator "github.com/paulusrobin/gogen-golib/validator/interface"
 	"github.com/paulusrobin/gogen/internal/config"
 	"github.com/paulusrobin/gogen/internal/pkg/user"
-	"github.com/paulusrobin/gogen/internal/pkg/user/payload"
+	"github.com/paulusrobin/gogen/internal/pkg/user/dto"
 )
 
 type CreateUserParam struct {
@@ -18,7 +18,7 @@ type CreateUserParam struct {
 
 func CreateUserEndpoint(param CreateUserParam) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		createUserRequest, ok := request.(payload.CreateUser)
+		createUserRequest, ok := request.(dto.CreateUser)
 		if !ok {
 			return nil, fmt.Errorf("invalid request")
 		}

@@ -12,8 +12,8 @@ import (
 	validator "github.com/paulusrobin/gogen-golib/validator/interface"
 	"github.com/paulusrobin/gogen/internal/config"
 	"github.com/paulusrobin/gogen/internal/pkg/greeting"
+	greetingEncoding "github.com/paulusrobin/gogen/internal/pkg/greeting/encoding"
 	greetingEndpoint "github.com/paulusrobin/gogen/internal/pkg/greeting/endpoint"
-	greetingPayload "github.com/paulusrobin/gogen/internal/pkg/greeting/payload"
 	greetingUseCase "github.com/paulusrobin/gogen/internal/pkg/greeting/usecase"
 	"github.com/paulusrobin/gogen/internal/pkg/user"
 	userEndpoint "github.com/paulusrobin/gogen/internal/pkg/user/endpoint"
@@ -120,7 +120,7 @@ func (s *httpServer) routes() {
 	greet := s.ec.Group("/greetings")
 	greet.GET("", transportHttp.MakeHandler(
 		s.greeting.greetEndpoint,
-		goKitEcho.WithDecoder(greetingPayload.DecodeGreetingRequest(s.validation)),
+		goKitEcho.WithDecoder(greetingEncoding.DecodeGreetingRequest(s.validation)),
 	))
 
 	api := s.ec.Group("/api")
