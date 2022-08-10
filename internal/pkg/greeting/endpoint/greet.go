@@ -7,7 +7,7 @@ import (
 	validator "github.com/paulusrobin/gogen-golib/validator/interface"
 	"github.com/paulusrobin/gogen/internal/config"
 	"github.com/paulusrobin/gogen/internal/pkg/greeting"
-	"github.com/paulusrobin/gogen/internal/pkg/greeting/payload"
+	"github.com/paulusrobin/gogen/internal/pkg/greeting/dto"
 )
 
 type GreetingParam struct {
@@ -19,7 +19,7 @@ type GreetingParam struct {
 // GreetingEndpoint endpoint.
 func GreetingEndpoint(param GreetingParam) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		greetingRequest, ok := request.(payload.GreetingRequest)
+		greetingRequest, ok := request.(dto.GreetingRequest)
 		if !ok {
 			return nil, fmt.Errorf("invalid request")
 		}
