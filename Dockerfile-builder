@@ -1,16 +1,15 @@
-FROM golang:1.17.9-alpine3.15 AS builder
+FROM golang:1.18-alpine3.15
 
-RUN apk --update add git make openssh
+RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.49.0
+RUN apk --update add curl git openssh
+WORKDIR /app
 
-RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.45.2
+# live reload tool
+RUN go install github.com/cosmtrek/air@latest
 
 ARG SSH_PRIVATE_KEY
 RUN mkdir -p ~/.ssh && echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa && chmod 0600 ~/.ssh/id_rsa \
     && git config --global url."git@github.com:".insteadOf https://github.com/ \
     && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-ENV GO111MODULE on
-ENV GOOS linux
-ENV CGO_ENABLED 0
-
-EXPOSE 3001 3002
+ENV GO111MODULE=on GOOS=linux CGO_ENABLED=0

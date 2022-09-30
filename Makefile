@@ -29,7 +29,7 @@ RUN_TEST_IN_DOCKER ?= docker-compose exec -T -e APP_ENV=test gogen-project
 build-native: RUN_IN_DOCKER=
 build-native: build
 
-build:
+build: go-private-in-docker
 	# Build APP Binary
 	@echo "==========================="
 	@echo "Building APP binary"
@@ -92,7 +92,7 @@ docker-clean: docker-stop
 docker-restart: docker-stop docker-start
 
 environment: ## The only command needed to start a working environment
-environment: remove-env-file docker-restart create-env-file go-private build-native
+environment: remove-env-file docker-restart create-env-file go-private-in-docker build-native
 
 environment-clean: ## The only command needed to clean the environment
 environment-clean: docker-clean clean

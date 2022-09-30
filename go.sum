@@ -448,7 +448,7 @@ github.com/paulusrobin/gogen-golib/remote-config/consul/integrations/viper v1.0.
 github.com/paulusrobin/gogen-golib/remote-config/consul/integrations/viper v1.0.0/go.mod h1:EJyk9ZbGWDDPKDIJsbHxNswhLoNtYJo5eXWuyycnJuo=
 github.com/paulusrobin/gogen-golib/remote-config/consul/interface v1.0.0 h1:1sISPB+sMGo5y45aIoQUOFr97TbQjfBZ03JC5CVa40M=
 github.com/paulusrobin/gogen-golib/remote-config/consul/interface v1.0.0/go.mod h1:4EQJDujhhO/a2grXziYdsPBfZN7JAr3aFR/Ev7aB2XA=
-github.com/paulusrobin/gogen-golib/server/http v1.0.0 h1:VE6xxR7omQk7alC1tr+RyNsraAivxg38Pjlsx+hFvV4=
+github.com/paulusrobin/gogen-golib/server/http v1.0.0 h1:9ECyd4g1Lmy5RwmjNiUcW795sr/1CaQDViJctmsAed8=
 github.com/paulusrobin/gogen-golib/server/http v1.0.0/go.mod h1:F+Sq4N+YCOA/K0B8Z5JlCIrYBOZ1zAxtZxCPNtnsj5c=
 github.com/paulusrobin/gogen-golib/validator/integrations/go-playground-v10 v1.0.0 h1:QgnHTzSHXRGudLnxPqmJKYHqZ/SSt519eSefg5NtXvs=
 github.com/paulusrobin/gogen-golib/validator/integrations/go-playground-v10 v1.0.0/go.mod h1:bZ7QSJNS6DJxYtrujzu7OCm4if1WxoAqRmCHvJB9vUk=
