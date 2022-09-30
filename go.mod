@@ -4,19 +4,21 @@ go 1.18
 
 require (
 	github.com/go-kit/kit v0.12.0
-	github.com/paulusrobin/gogen-golib/encoding/json v1.0.0
 	github.com/paulusrobin/gogen-golib/go-kit/echo v1.0.0
 	github.com/paulusrobin/gogen-golib/mandatory v1.0.0
 	github.com/paulusrobin/gogen-golib/remote-config/consul/integrations/viper v1.0.0
 	github.com/paulusrobin/gogen-golib/remote-config/consul/interface v1.0.0
+	github.com/paulusrobin/gogen-golib/server/http v1.0.0
 	github.com/paulusrobin/gogen-golib/validator/integrations/go-playground-v10 v1.0.0
 	github.com/paulusrobin/gogen-golib/validator/interface v1.0.0
-	github.com/rs/zerolog v1.27.0
+	github.com/rs/zerolog v1.28.0
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.12.0
 	gorm.io/driver/postgres v1.3.8
 	gorm.io/gorm v1.23.8
 )
+
+require github.com/paulusrobin/gogen-golib/encoding/json v1.0.0 // indirect
 
 require (
 	cloud.google.com/go v0.100.2 // indirect
@@ -27,8 +29,6 @@ require (
 	github.com/coreos/go-systemd/v22 v22.3.3-0.20220203105225-a9a7ef127534 // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
-	github.com/go-kit/log v0.2.0 // indirect
-	github.com/go-logfmt/logfmt v0.5.1 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.11.0 // indirect
@@ -37,7 +37,7 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.8 // indirect
-	github.com/google/uuid v1.1.2
+	github.com/google/uuid v1.3.0
 	github.com/googleapis/gax-go/v2 v2.4.0 // indirect
 	github.com/hashicorp/consul/api v1.12.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
@@ -59,7 +59,7 @@ require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.4 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/labstack/echo/v4 v4.7.2
+	github.com/labstack/echo/v4 v4.9.0
 	github.com/labstack/gommon v0.3.1 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect

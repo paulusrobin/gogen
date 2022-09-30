@@ -13,7 +13,7 @@ import (
 	"github.com/paulusrobin/gogen/internal/config"
 	"github.com/paulusrobin/gogen/internal/pkg/greeting"
 	greetingEncoding "github.com/paulusrobin/gogen/internal/pkg/greeting/encoding"
-	greetingEndpoint "github.com/paulusrobin/gogen/internal/pkg/greeting/endpoint"
+	endpoint2 "github.com/paulusrobin/gogen/internal/pkg/greeting/endpoint"
 	greetingUseCase "github.com/paulusrobin/gogen/internal/pkg/greeting/usecase"
 	"github.com/paulusrobin/gogen/internal/pkg/user"
 	userEncoding "github.com/paulusrobin/gogen/internal/pkg/user/encoding"
@@ -77,7 +77,7 @@ func (s *httpServer) init() error {
 	s.user.useCase = userUseCase.NewUseCase(s.user.repository)
 
 	// initialize endpoint
-	s.greeting.greetEndpoint = greetingEndpoint.GreetingEndpoint(greetingEndpoint.GreetingParam{
+	s.greeting.greetEndpoint = endpoint2.GreetingEndpoint(endpoint2.GreetingParam{
 		Cfg:        s.cfg,
 		UseCase:    s.greeting.useCase,
 		Validation: s.validation,

@@ -4,27 +4,17 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-kit/kit/endpoint"
-	validator "github.com/paulusrobin/gogen-golib/validator/interface"
-	"github.com/paulusrobin/gogen/internal/config"
-	"github.com/paulusrobin/gogen/internal/pkg/greeting"
 	"github.com/paulusrobin/gogen/internal/pkg/greeting/dto"
 )
 
-type GreetingParam struct {
-	Cfg        config.Config
-	UseCase    greeting.UseCase
-	Validation validator.Validation
-}
-
-// GreetingEndpoint endpoint.
-func GreetingEndpoint(param GreetingParam) endpoint.Endpoint {
+func (e Endpoint) Greet() endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		greetingRequest, ok := request.(dto.GreetingRequest)
 		if !ok {
 			return nil, fmt.Errorf("invalid request")
 		}
 
-		response, err := param.UseCase.Greet(ctx, greetingRequest)
+		response, err := e.useCase.Greet(ctx, greetingRequest)
 		if err != nil {
 			return nil, err
 		}
