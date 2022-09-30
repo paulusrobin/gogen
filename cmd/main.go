@@ -1,9 +1,7 @@
 package main
 
 import (
-	"github.com/paulusrobin/gogen/cmd/grpc"
 	"github.com/paulusrobin/gogen/cmd/http"
-	"github.com/paulusrobin/gogen/cmd/subscriber"
 	"github.com/paulusrobin/gogen/internal/config"
 	"github.com/rs/zerolog"
 	"github.com/spf13/cobra"
@@ -23,9 +21,7 @@ func main() {
 	zerolog.SetGlobalLevel(globalLogLevel)
 
 	cmd.AddCommand(
-		http.Cmd(cfg),       // add http command
-		grpc.Cmd(cfg),       // add grpc command
-		subscriber.Cmd(cfg), // add subscriber command
+		http.Cmd(cfg), // add http command
 	)
 
 	// execute command

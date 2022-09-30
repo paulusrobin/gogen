@@ -4,8 +4,8 @@ go 1.18
 
 require (
 	github.com/go-kit/kit v0.12.0
+	github.com/go-redis/redis/v8 v8.11.5
 	github.com/paulusrobin/gogen-golib/go-kit/echo v1.0.0
-	github.com/paulusrobin/gogen-golib/mandatory v1.0.0
 	github.com/paulusrobin/gogen-golib/remote-config/consul/integrations/viper v1.0.0
 	github.com/paulusrobin/gogen-golib/remote-config/consul/interface v1.0.0
 	github.com/paulusrobin/gogen-golib/server/http v1.0.0
@@ -18,7 +18,10 @@ require (
 	gorm.io/gorm v1.23.8
 )
 
-require github.com/paulusrobin/gogen-golib/encoding/json v1.0.0 // indirect
+require (
+	github.com/cespare/xxhash/v2 v2.1.2 // indirect
+	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+)
 
 require (
 	cloud.google.com/go v0.100.2 // indirect
@@ -37,7 +40,7 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.8 // indirect
-	github.com/google/uuid v1.3.0
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.4.0 // indirect
 	github.com/hashicorp/consul/api v1.12.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
@@ -78,7 +81,6 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.3.0 // indirect
-	github.com/ua-parser/uap-go v0.0.0-20211112212520-00c877edfe0f // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.1 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.4 // indirect
@@ -103,5 +105,5 @@ require (
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

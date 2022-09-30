@@ -1,7 +1,6 @@
 package postgres
 
 import (
-	"github.com/paulusrobin/gogen/internal/config"
 	"github.com/rs/zerolog/log"
 	pg "gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -9,7 +8,7 @@ import (
 )
 
 // NewDatabase initialize postgres database.
-func NewDatabase(database config.PostgresDatabase) (*gorm.DB, error) {
+func NewDatabase(database Config) (*gorm.DB, error) {
 	log.Debug().Msg("Connecting to Postgres")
 
 	// Init gormDB connection

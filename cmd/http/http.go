@@ -9,7 +9,6 @@ import (
 	"github.com/paulusrobin/gogen/internal/config"
 	greetingEncoding "github.com/paulusrobin/gogen/internal/pkg/greeting/encoding"
 	"github.com/paulusrobin/gogen/internal/pkg/greeting/endpoint"
-	transportHttp "github.com/paulusrobin/gogen/internal/server/transport/http"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
@@ -29,7 +28,7 @@ func initializeServer(sig chan os.Signal, cfg config.Config) (IServer, error) {
 		httpServer.RegisterRoute(func(ec *echo.Echo) {
 			greeting := endpoint.NewEndpoint(cfg, validation)
 			greet := ec.Group("/greetings")
-			greet.GET("", transportHttp.MakeHandler(
+			greet.GET("", goKitEcho.Handler(
 				greeting.Greet(),
 				goKitEcho.WithDecoder(greetingEncoding.DecodeGreetingRequest(validation)),
 			))

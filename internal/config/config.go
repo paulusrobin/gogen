@@ -17,6 +17,7 @@ type (
 		PubSub   PubSub           `mapstructure:",squash"`
 		PProf    Pprof            `mapstructure:",squash"`
 		Postgres PostgresDatabase `mapstructure:",squash"`
+		Redis    Redis            `mapstructure:",squash"`
 	}
 
 	// PostgresDatabase contains postgres configuration.
@@ -26,6 +27,13 @@ type (
 		MaxOpenConnections    int             `mapstructure:"DB_POSTGRES_MAX_OPEN_CONNECTIONS"`
 		MaxIdleConnections    int             `mapstructure:"DB_POSTGRES_MAX_IDLE_CONNECTIONS"`
 		MaxConnectionLifetime time.Duration   `mapstructure:"DB_POSTGRES_MAX_CONNECTIONS_LIFETIME"`
+	}
+
+	// Redis contains redis configuration.
+	Redis struct {
+		Address  string `mapstructure:"REDIS_ADDRESS"`
+		Password string `mapstructure:"REDIS_PASSWORD"`
+		DB       int    `mapstructure:"REDIS_DB"`
 	}
 
 	// Consul contains consul remote config related values.
