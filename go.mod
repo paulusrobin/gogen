@@ -6,6 +6,7 @@ require (
 	github.com/go-kit/kit v0.12.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/paulusrobin/gogen-golib/go-kit/echo v1.0.0
+	github.com/paulusrobin/gogen-golib/mandatory v1.0.0
 	github.com/paulusrobin/gogen-golib/remote-config/consul/integrations/viper v1.0.0
 	github.com/paulusrobin/gogen-golib/remote-config/consul/interface v1.0.0
 	github.com/paulusrobin/gogen-golib/server/http v1.0.0
@@ -21,6 +22,8 @@ require (
 require (
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
+	github.com/paulusrobin/gogen-golib/encoding/json v1.0.0 // indirect
+	github.com/ua-parser/uap-go v0.0.0-20211112212520-00c877edfe0f // indirect
 )
 
 require (

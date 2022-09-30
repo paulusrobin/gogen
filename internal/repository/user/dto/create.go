@@ -4,9 +4,9 @@ import "github.com/paulusrobin/gogen/internal/repository/model"
 
 type (
 	CreateRequest struct {
-		User model.User
+		User *model.User
 	}
 	CreateResponse struct {
-		User model.User
+		User *model.User
 	}
 )
