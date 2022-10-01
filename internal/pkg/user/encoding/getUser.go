@@ -9,7 +9,7 @@ import (
 // DecodeGetRequest decoder function for get endpoint.
 func DecodeGetRequest(validator validator.Validation) func(c echo.Context) (interface{}, error) {
 	return func(c echo.Context) (interface{}, error) {
-		var request dto.GetByIDRequest
+		var request dto.GetByIDEndpointRequest
 		if err := c.Bind(&request); err != nil {
 			return nil, err
 		}
