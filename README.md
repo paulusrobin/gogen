@@ -10,5 +10,5 @@ docker compose run -v $(pwd)/db/migrations:/migrations migrate create -ext sql -
 ### How to apply
 
 ```
-docker compose run -v $(pwd)/db/migrations:/migrations migrate -path=/migrations/ -database "postgres://postgres@postgres:5432/joker?sslmode=disable&search_path=public" up
+docker compose run -v $(pwd)/db/migrations:/migrations migrate -path=/migrations/ -database "postgres://postgres@postgres:5432/postgres?sslmode=disable&search_path=public" up
 ```

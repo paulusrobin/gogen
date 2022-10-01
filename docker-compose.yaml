@@ -63,7 +63,7 @@ services:
     image: migrate/migrate:v4.15.0
     volumes:
       - ./db/migrations:/migrations
-    command: ["-path", "/migrations", "-database",  "postgres://user:123456@postgres:5432/joker?sslmode=disable&search_path=public", "up"]
+    command: ["-path", "/migrations", "-database",  "postgres://user:123456@postgres:5432/postgres?sslmode=disable&search_path=public", "up"]
     depends_on:
       - postgres
 
