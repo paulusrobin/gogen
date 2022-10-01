@@ -45,7 +45,7 @@ func (i implementation) GetByID(ctx context.Context, request dto.GetByIDRequest)
 
 	response, err := i.repo.GetByID(ctx, request)
 	if err == nil {
-		if redisErr := i.redis.Set(ctx, key, response.User, defaultUserTTL).Err(); redisErr != nil {
+		if redisErr := i.redis.Set(ctx, key, *response.User, defaultUserTTL).Err(); redisErr != nil {
 			log.Ctx(ctx).Error().Err(redisErr).
 				Fields(map[string]interface{}{
 					"key":  key,

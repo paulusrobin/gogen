@@ -8,6 +8,7 @@ import (
 type (
 	GetByIDEndpointRequest struct {
 		Mandatory mandatory.Request
+		UserID    uint `param:"id"`
 	}
 	GetByIDEndpointResponse struct {
 		User model.User
@@ -17,5 +18,6 @@ type (
 func (request GetByIDEndpointRequest) ToGetByIDUsecaseRequest() GetByIDUsecaseRequest {
 	return GetByIDUsecaseRequest{
 		Mandatory: request.Mandatory,
+		UserID:    request.UserID,
 	}
 }

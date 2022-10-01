@@ -64,11 +64,11 @@ func initializeServer(sig chan os.Signal, cfg config.Config) (IServer, error) {
 		httpServer.RegisterRoute(func(ec *echo.Echo) {
 			users := userEndpoint.NewEndpoint(cfg, validation, database, redisCache)
 			user := ec.Group("/api/v1/users")
-			user.GET("", goKitEcho.Handler(
+			user.POST("", goKitEcho.Handler(
 				users.Create(),
 				goKitEcho.WithDecoder(userEncoding.DecodeCreateRequest(validation)),
 			))
-			user.GET("/{id}", goKitEcho.Handler(
+			user.GET("/:id", goKitEcho.Handler(
 				users.GetByID(),
 				goKitEcho.WithDecoder(userEncoding.DecodeGetRequest(validation)),
 			))

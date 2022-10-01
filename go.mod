@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/go-kit/kit v0.12.0
 	github.com/go-redis/redis/v8 v8.11.5
+	github.com/paulusrobin/gogen-golib/encoding/binary v1.0.0
 	github.com/paulusrobin/gogen-golib/go-kit/echo v1.0.0
 	github.com/paulusrobin/gogen-golib/mandatory v1.0.0
 	github.com/paulusrobin/gogen-golib/remote-config/consul/integrations/viper v1.0.0
@@ -18,6 +19,8 @@ require (
 	gorm.io/driver/postgres v1.3.8
 	gorm.io/gorm v1.23.8
 )
+
+require github.com/kelindar/binary v1.0.17 // indirect
 
 require (
 	cloud.google.com/go v0.100.2 // indirect

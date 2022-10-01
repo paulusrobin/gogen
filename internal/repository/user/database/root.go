@@ -14,7 +14,7 @@ type implementation struct {
 }
 
 func (i implementation) Create(ctx context.Context, request dto.CreateRequest) (dto.CreateResponse, error) {
-	tx := i.db.WithContext(ctx).Model(model.User{}).Create(&request.User)
+	tx := i.db.WithContext(ctx).Model(model.User{}).Create(request.User)
 	if err := tx.Error; err != nil {
 		log.Ctx(ctx).Error().Err(err).
 			Fields(map[string]interface{}{"user": request.User}).

@@ -363,6 +363,8 @@ github.com/jstemmer/go-junit-report v0.0.0-20190106144839-af01ea7f8024/go.mod h1
 github.com/jstemmer/go-junit-report v0.9.1/go.mod h1:Brl9GWCQeLvo8nXZwPNNblvFj/XSXhF0NWZEnDohbsk=
 github.com/julienschmidt/httprouter v1.2.0/go.mod h1:SYymIcj16QtmaHHD7aYtjjsJG7VTCxuUUipMqKk8s4w=
 github.com/julienschmidt/httprouter v1.3.0/go.mod h1:JR6WtHb+2LUe8TCKY3cZOxFyyO8IZAc4RVcycCCAKdM=
+github.com/kelindar/binary v1.0.17 h1:DANIwtqpi9EuD71gmiecWASpyKK6C1iCTcx0VaP5QLk=
+github.com/kelindar/binary v1.0.17/go.mod h1:/twdz8gRLNMffx0U4UOgqm1LywPs6nd9YK2TX52MDh8=
 github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
@@ -438,6 +440,8 @@ github.com/onsi/gomega v1.18.1 h1:M1GfJqGRrBrrGGsbxzV5dqM2U2ApXefZCQpkukxYRLE=
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/pascaldekloe/goe v0.1.0 h1:cBOtyMzM9HTpWjXfbbunk26uA6nG3a8n06Wieeh0MwY=
 github.com/pascaldekloe/goe v0.1.0/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
+github.com/paulusrobin/gogen-golib/encoding/binary v1.0.0 h1:jH+GrlU9X10rBvcXZfS3lyEkW+BGfO1uA6sDWKei9XY=
+github.com/paulusrobin/gogen-golib/encoding/binary v1.0.0/go.mod h1:g8UTI7kJjId3SEa2WCdDZdll7zW5Hdx5H6xa65gSIj4=
 github.com/paulusrobin/gogen-golib/encoding/json v1.0.0 h1:SNwJC5suMC7Mp6KsSfFmyha8Yu5u6w34zf+iavEAyZg=
 github.com/paulusrobin/gogen-golib/encoding/json v1.0.0/go.mod h1:NN4Y222b+qsGBllLmRK00VsZmpmHRGIYqairUzE+q+g=
 github.com/paulusrobin/gogen-golib/go-kit/echo v1.0.0 h1:3PdLsGzZIaW3dDICWg56jQD4WnhPw8mC+552h5bXJqg=
